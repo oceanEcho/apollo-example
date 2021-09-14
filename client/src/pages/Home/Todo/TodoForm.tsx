@@ -6,10 +6,11 @@ import {
   AddTodoMutationVariables,
   CompleteTodoMutation,
   CompleteTodoMutationVariables,
-  Todo,
+  TodoFormDataFragment,
 } from '../../../api/types';
 import { AddTodoForm } from './AddTodoForm';
 import { TodoList } from './TodoList';
+import { notEmpty } from '../../../utils/notEmpty';
 
 import styles from './styles.module.scss';
 
@@ -33,7 +34,9 @@ const COMPLETE_TODO = gql`
   }
 `;
 
-export const TodoForm: FC<{ todos: Todo[] }> = ({ todos }) => {
+export const TodoForm: FC<{ data?: TodoFormDataFragment }> = ({ data }) => {
+  const todoList = data?.todos?.filter(notEmpty) || [];
+
   const [addTodo] = useMutation<AddTodoMutation, AddTodoMutationVariables>(ADD_TODO, { refetchQueries: ['GetTodos'] });
 
   const onAddTodo = (text: string) => {
@@ -50,8 +53,8 @@ export const TodoForm: FC<{ todos: Todo[] }> = ({ todos }) => {
     <section className={styles.Home}>
       <h1>To do</h1>
       <AddTodoForm onAddTodo={onAddTodo} />
-      {!todos.length && <p>Nothing to do...</p>}
-      <TodoList todoList={todos} onTodoClick={onTodoClick} />
+      {!todoList.length && <p>Nothing to do...</p>}
+      <TodoList todoList={todoList} onTodoClick={onTodoClick} />
     </section>
   );
 };

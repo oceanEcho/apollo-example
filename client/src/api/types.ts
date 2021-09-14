@@ -13,7 +13,7 @@ export type Scalars = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  addTodo?: Maybe<Todo>;
+  addTodo?: Maybe<Array<Maybe<Todo>>>;
   completeTodo?: Maybe<Todo>;
 };
 
@@ -57,7 +57,9 @@ export type AddTodoMutationVariables = Exact<{
 
 export type AddTodoMutation = {
   __typename?: 'Mutation';
-  addTodo?: Maybe<{ __typename?: 'Todo'; id?: Maybe<string>; text?: Maybe<string>; active?: Maybe<boolean> }>;
+  addTodo?: Maybe<
+    Array<Maybe<{ __typename?: 'Todo'; id?: Maybe<string>; text?: Maybe<string>; active?: Maybe<boolean> }>>
+  >;
 };
 
 export type CompleteTodoMutationVariables = Exact<{
@@ -67,4 +69,11 @@ export type CompleteTodoMutationVariables = Exact<{
 export type CompleteTodoMutation = {
   __typename?: 'Mutation';
   completeTodo?: Maybe<{ __typename?: 'Todo'; id?: Maybe<string>; text?: Maybe<string>; active?: Maybe<boolean> }>;
+};
+
+export type TodoFormDataFragment = {
+  __typename?: 'Query';
+  todos?: Maybe<
+    Array<Maybe<{ __typename?: 'Todo'; id?: Maybe<string>; text?: Maybe<string>; active?: Maybe<boolean> }>>
+  >;
 };

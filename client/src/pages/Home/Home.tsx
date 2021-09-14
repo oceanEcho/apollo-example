@@ -4,16 +4,13 @@ import { gql, useQuery } from '@apollo/client';
 import { GetTodosQuery } from '../../api/types';
 import { TodoForm } from './Todo';
 import { Loader } from '../../components/Loader';
-import { notEmpty } from '../../utils/notEmpty';
+import { TODO_FORM_FRAGMENT } from './fragments';
 
 const GET_TODOS = gql`
   query GetTodos {
-    todos {
-      id
-      text
-      active
-    }
+    ...TodoFormData
   }
+  ${TODO_FORM_FRAGMENT.todo}
 `;
 
 export const Home = () => {
@@ -23,7 +20,9 @@ export const Home = () => {
     return <Loader />;
   }
 
-  const todos = data?.todos?.filter(notEmpty) || [];
+  if (error) {
+    return <p>Error :(</p>;
+  }
 
-  return <TodoForm todos={todos} />;
+  return <TodoForm data={data} />;
 };
