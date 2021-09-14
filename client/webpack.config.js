@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const { DefinePlugin } = webpack;
 
 module.exports = {
@@ -37,6 +38,14 @@ module.exports = {
     }),
     new DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'environment.json'),
+          to: path.resolve(__dirname, 'dist'),
+        },
+      ],
     }),
   ],
   devServer: {

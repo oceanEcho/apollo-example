@@ -1,0 +1,22 @@
+overwrite: true
+schema: "http://localhost:4000"
+documents:
+  - "src/**/*.ts"
+  - "src/**/*.tsx"
+  - "!**/Character.tsx"
+generates:
+  src/api/types.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+    hooks:
+      afterOneFileWrite:
+        - prettier --write
+    config:
+      scalars:
+        ID: string
+        String: string
+        Boolean: boolean
+        Int: number
+        Float: number
+        Long: number

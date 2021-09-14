@@ -11,7 +11,7 @@ export const Navigation: FC = () => {
       <NavLink exact to='/' className={styles.NavLink} activeClassName={styles.ActiveNavLink}>
         <Icon name='Home' width={36} height={36} />
       </NavLink>
-      <NavLink to='/about' className={styles.NavLink} activeClassName={styles.ActiveNavLink}>
+      <NavLink to='/character/1' className={styles.NavLink} activeClassName={styles.ActiveNavLink}>
         <Icon name='Info' width={36} height={36} />
       </NavLink>
     </nav>
