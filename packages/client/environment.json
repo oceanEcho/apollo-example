@@ -1,0 +1,6 @@
+{
+  "api": {
+    "uri": "http://localhost:4000/",
+    "externalUri": "https://rickandmortyapi.com/graphql"
+  }
+}
